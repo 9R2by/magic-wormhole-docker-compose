@@ -1,15 +1,27 @@
 services:
-  wormhole-mailox:
+  wormhole-mailbox:
     build: 
      context: ./mailbox-server
      dockerfile: Dockerfile
-    ports:
+    expose:
       - "4000:4000"
     restart: unless-stopped
   wormhole-transit:
     build: 
       context: ./transit-relay
       dockerfile: Dockerfile
-    ports:
+    expose:
       - "4001:4001"
+    restart: unless-stopped
+
+  nginx-proxy:
+    build:
+     context: ./nginx
+     dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+      - "4001:4001"
+    depends_on:
+      - wormhole-mailbox
+      - wormhole-transit
     restart: unless-stopped

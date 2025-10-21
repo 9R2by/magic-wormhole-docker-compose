@@ -1,6 +1,6 @@
 # magic-wormhole-docker-compose
 
-Setup for running the transit relay and mailbox server for magic-wormhole with docker compose.
+Simple setup for running the transit relay and mailbox server for magic-wormhole with docker compose. Uses a nginx as a reverse proxy infront of it, but you dont really need it.
 
 ## Start the containers
 
