@@ -38,4 +38,4 @@ docker run -p 4001:4001 -d transit-relay
 
 ## Warning
 
-Currently the services are running as root, this is planned to be changed.
+~~Currently the services are running as root, this is planned to be changed.~~
