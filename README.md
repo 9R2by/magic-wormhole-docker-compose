@@ -36,6 +36,13 @@ docker build -t transit-relay .
 docker run -p 4001:4001 -d transit-relay
 ```
 
+
+## Planned changes
+
+- Change nginx to traefik.
+- Check if its neccessary to update the docker images via apt-get while building.
+
 ## Warning
 
 ~~Currently the services are running as root, this is planned to be changed.~~
+
