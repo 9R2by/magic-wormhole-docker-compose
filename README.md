@@ -41,6 +41,7 @@ docker run -p 4001:4001 -d transit-relay
 
 - Change nginx to traefik.
 - Check if its neccessary to update the docker images via apt-get while building.
+- Check if possible to just switch to Podman
 
 ## Warning
 
