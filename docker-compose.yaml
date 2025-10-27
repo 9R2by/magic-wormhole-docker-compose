@@ -1,27 +1,51 @@
 services:
+
   wormhole-mailbox:
     build: 
-     context: ./mailbox-server
-     dockerfile: Dockerfile
+      context: ./mailbox-server
+      dockerfile: Dockerfile
     expose:
-      - "4000:4000"
+      - "4000"
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mailbox.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.mailbox.entrypoints=web"
+      - "traefik.http.routers.mailbox.service=mailbox-svc"
+      - "traefik.http.services.mailbox-svc.loadbalancer.server.port=4000"
+
+
   wormhole-transit:
     build: 
       context: ./transit-relay
       dockerfile: Dockerfile
     expose:
-      - "4001:4001/tcp"
+      - "4001"
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.transit.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.transit.entrypoints=rawtcp"
+      - "traefik.tcp.routers.transit.service=transit-svc"
+      - "traefik.tcp.services.transit-svc.loadbalancer.server.port=4001"
+
+  traefik:
+    image: traefik:3.5.3
     restart: unless-stopped
 
-  nginx-proxy:
-    build:
-     context: ./nginx
-     dockerfile: Dockerfile
+    command:
+      - "--entrypoints.web.address=:4000"
+      - "--entrypoints.rawtcp.address=:4001"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+
+      - "--accesslog=true"
+      - "--accesslog.format=json"
+      - "--log.level=INFO"
+
     ports:
       - "4000:4000"
       - "4001:4001"
-    depends_on:
-      - wormhole-mailbox
-      - wormhole-transit
-    restart: unless-stopped
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
