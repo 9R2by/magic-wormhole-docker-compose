@@ -11,7 +11,7 @@ services:
       context: ./transit-relay
       dockerfile: Dockerfile
     expose:
-      - "4001:4001"
+      - "4001:4001/tcp"
     restart: unless-stopped
 
   nginx-proxy:
