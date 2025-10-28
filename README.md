@@ -1,6 +1,6 @@
 # magic-wormhole-docker-compose
 
-Simple setup for running the transit relay and mailbox server for magic-wormhole with docker compose. Uses a nginx as a reverse proxy infront of it, but you dont really need it.
+Simple setup for running the transit relay and mailbox server for magic-wormhole with (docker) compose. Uses a traefik as a reverse proxy infront of it, but you dont really need it.
 
 ## Start the containers
 
@@ -39,11 +39,12 @@ docker run -p 4001:4001 -d transit-relay
 
 ## Planned changes
 
-- ~~Change nginx to traefik.~~
+
 - Check if its neccessary to update the docker images via apt-get while building.
-- Check if possible to just switch to Podman
 - Harden the traefik settings with rate limiting etc..
 - Check if the transit relay works (Testing)
+- ~~Change nginx to traefik.~~
+- ~~Check if possible to just switch to Podman~~
 
 ## Warning
 
