@@ -4,14 +4,14 @@ services:
      context: ./mailbox-server
      dockerfile: Dockerfile
     expose:
-      - "4000:4000"
+      - "4000"
     restart: unless-stopped
   wormhole-transit:
     build: 
       context: ./transit-relay
       dockerfile: Dockerfile
     expose:
-      - "4001:4001/tcp"
+      - "4001"
     restart: unless-stopped
 
   nginx-proxy:
