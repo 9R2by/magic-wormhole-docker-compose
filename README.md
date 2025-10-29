@@ -43,7 +43,7 @@ docker run -p 4001:4001 -d transit-relay
 - Check if its neccessary to update the docker images via apt-get while building.
 - Harden the traefik settings with rate limiting etc..
 - Check if the transit relay works (Testing)
-- Fix issues with traefik and redo config (issues on linux)
+- Fix issues with traefik and redo config (issues on linux, the nginx branch works)
 - ~~Change nginx to traefik.~~
 - ~~Check if possible to just switch to Podman~~
 
